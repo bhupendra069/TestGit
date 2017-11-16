@@ -1,1 +1,774 @@
-My first class apllication
+class MPC_XTREMIO extends EMC_SOLUTION {names EN "EMC VNX Storage Solution"
+	characteristics
+	PRIMARY_PCM_SELECTION assignedValues ["XTREMIO_X02"] invisible,
+	PRIMARY_PCM_SELECTION_TABLE assignedValues ["SOL_BASE_MDLS"],
+	PRIMARY_PCM_PRODUCT_TABLE assignedValues ["SOLUTION_PRODS"],
+	PRIMARY_PCM_FAMILY assignedValues ["XTREMIO"],
+//	TYPE_OF_CONFIGURATION invisible,
+	TOPICAL_GROUP_IDENTIFIERS assignedValues ['SUPPORT_ATTR', 'SOLUTION_ATTR','XTREM_APP_ATTR','RP_SUPPORT_ATTR'],
+	//TOG ADD_SW_SOLUTIONS_PACK defaultValues ["NO"],
+	//SW Solutions main options
+	//TOG MANAGEMENT_AND_MONITORING_SP_C,
+	//TOG VMWARE_SP_C,
+	//TOG SQL_SERVER_SP_C,
+	//TOG ORACLE_SP_C,
+	//TOG BUSINESS_CONTINUITY_SP_C,
+	//SW Solutions sub options
+	//TOG MANAGEMENT_AND_MONITORING_SP,
+	//TOG VMWARE_SP,
+	//TOG SQL_SERVER_SP,
+	//TOG ORACLE_SP,
+	//TOG BUSINESS_CONTINUITY_SP,
+	NEW_UPGRADE_SELECTED invisible,
+	VIPR_SRM_WITHOUT_UPGRADING invisible,
+	NOTE_VIPR_SRM_SUITE invisible,//making invisible for WR463484
+	RPT_VM_NEW invisible,
+	ADDITIONAL_RPT_VM_STR_UPG invisible,
+	RPT_VM_UPG invisible,
+	
+	//WR458384
+    RPT_VM_EXPAND_PRODUCT invisible,
+    RPT_VM_STARTER_NEW invisible,
+    RPT_VM_STR_UPG invisible,
+//    RPT_VM_EXPAND_PRODUCT_FLAG invisible
+
+	CHECK_RP4VM_INSTALL invisible, //472134
+	REP_TYPE_SCAL invisible, //472134
+
+//WR463484
+	    
+		NEW_ADD_VIPR_SRM invisible,
+		NEW_ADD_VIPR_SUITE invisible,
+		UPG_VIPR_SRM invisible,
+		UPG_VIPR_SUITE invisible,
+   		UPG_ADD_VIPR_SRM invisible,
+		UPG_ADD_VIPR_SUITE invisible,
+//WR460554
+	RPA_QUANTITY invisible,
+	RPA_TYPE invisible,
+	TYPE_OF_UPGRADE invisible,
+	RPA_QUANTITY_NEW_XTR invisible,
+	RPA_QUANTITY_UPG_XTR invisible,
+	RPA_TYPE_NEW_XTR invisible,
+	RPA_TYPE_UPG_XTR invisible,
+	NO_ADD_PHY_RPA invisible,
+	RPT_E_EXPAND_PRODUCT,
+	ADD_RPT_E_TO_XTREMIO,
+	ADD_RPT_E_FULL,
+	XTREMIO_UPG_TO_FULL_XTREMIO,
+	ADD_PHY_APP,
+	ADD_RPT_TO_XIO_UPG,
+	ADD_RPT_E_FULL_UPG,
+	UPG_RPT_E_FULL,
+		//TOG WR460557
+	XTREMIO_X_BRICK_LICENSES  invisible,	
+	XTREMIO_FRAME_LIC_LOCAL invisible,
+	XTREMIO_FRAME_LIC_METRO invisible,
+	VPLEX_HARDWARE invisible	
+	//END TOG	
+	,PRIMARY_MPC_SELECTION assignedValues ["MPC_XTREMIO"] invisible //WR455061
+	,PWRPTH_EXPAND_PRODUCT invisible//WR476104
+	,VIPR_EXPAND_PRODUCT invisible//479077
+	,APPSYNC_EXPAND_PRODUCT invisible //483505
+}
+
+material MPC_XTREMIO {names EN "MPC XTREMIO" longNames EN "PCM Solution Configuration" classes MPC_XTREMIO boms EMC_SOLUTION_BOM}
+
+constraintNet SOLUTION_EXT_CNET {
+	constraints
+	INCLUDE_VARTAB,
+	SET_SOLUTION_IS_MTRL_INSTANCE,
+	HIDE_CORRESPONING_COSELL,
+	SET_INSTALL_COUNTRY,
+	RESTRICT_TYPE_OF_CONFIG,
+	//TOG 473303
+//	HIDE_SW_SOLUTIONS_PACK,
+//	HIDE_SW_PACK_OPTIONS,
+//	HIDE_SW_PACK_SUB_OPTIONS,
+	SET_XTREMIO_APP_SYNCH_1,
+	SET_XTREMIO_APP_SYNCH,
+//	HIDE_VPLEX_VS2_FOR_SRM,//Commented WR487807
+	HIDE_COSELLS,
+	HIDE_RPT_VM,
+	//	HIDE_NOTE_VIPR_SRM_SUITE,
+	//EXPAND_APPSYNC_UPG,
+//	HIDE_RPT_VM_EXPAND_PRD,//WR458384
+//WR460554 & WR465650
+	EXPAND_GEN6_PCM_PRODUCT,
+//	HIDE_MULTI_GEN6_PCM,
+	SPL_XIO_RP_ATTR,
+	INV_INITIAL_RP_CSTIC,
+	INV_NEW_RP_CSTIC,
+	INV_UPG_RP_CSTIC,
+	DISABLE_RPT_E_OPTIONS_NEW,
+	DISABLE_RPT_E_OPTIONS_UPG,
+	//TOG WR460557
+	HIDE_XIO_RPT,
+	//END TOG
+//	DISABLE_VS2_EXPAND_BUTTON,//WR474537//Commented WR487807
+	SET_PWRPTH_EXPAND_PRODUCT,//WR476104
+	SET_APSYNC_EXPAND_PRODUCT,//483505 
+}
+
+ruleNet SOLUTION_EXT_RNET{
+	rules
+	INITILAIZE_FLAGS,
+	//DEFAULT_CSTICS_MPC,
+	SET_NEW_UPGRADE_SELECTED,
+	SYNCH_XTREMIO_APP_SOLUTION,
+//	DEFAULT_COSELL_VIPR_SUITE,
+//	DEFAULT_COSELL_VIPR_SRM,
+//	DEFAULT_COSELL_POWERPATH,
+//	DEFAULT_COSELL_VPLEX_VS2,
+//	DEFAULT_COSELL_RPT_E,
+	DFLT_FULLFILMNT,
+	SET_EXPAND_RPT_VM_NEW,
+	SET_EXPAND_RPT_VM_UPG,
+	SET_EXPAND_APPSYNC,
+	//WR458384
+//	INIT_RPT_VM_EXPAND_PRD_FLG,
+//	INCR_RPT_VM_EXPAND_PRD_FLG,
+//	MAKE_STICKY_DELT_RPT_VM_EPND,
+//WR463484
+	SET_EXPAND_VIPR_SRM,
+	SET_EXPAND_VIPR_SUITE,
+//WR460554
+	SET_EXPAND_RPT_E,
+	DEFAULT_CSTICS_NO,
+			 //TOG 
+		CHANGE_RPT_XIO_NO,
+		CHANGE_RPT_XIO_NO_UG,
+		CHANGE_RPT_WU_NO,
+		CHANGE_RPT_FULL,
+		CHANGE_UGPRPT_FULL
+		//maybe
+		//CHANGE_RPTUG_FULL
+		//END TOG
+}
+
+characteristic PRIMARY_MPC_SELECTION  {textLength 40 restrictable}//WR455061
+
+characteristic NOTE_VIPR_SRM_SUITE{names EN "Either ViPR Suite or ViPR SRM software can be selected at a time." textLength 20}
+characteristic RPT_VM_NEW {names EN "Add RecoverPoint for VM to XtremIO Order" textLength 3}
+//WR467249 RJT1 changed names EN
+characteristic ADDITIONAL_RPT_VM_STR_UPG {names EN "Upgrade RecoverPoint for VM full version" textLength 3}
+characteristic RPT_VM_UPG {names EN "Add RecoverPoint for VM full version" textLength 3}
+//WR458384
+characteristic RPT_VM_EXPAND_PRODUCT {names EN "RecoverPoint for VM" textLength 3 values "YES" names EN "Expand", "NO" names EN "Unexpand"}
+//characteristic RPT_VM_EXPAND_PRODUCT_FLAG{ numericLength 1 specialFunction aggregating}
+characteristic RPT_VM_STARTER_NEW {names EN "Add RecoverPoint for VM Starter to XtremIO order" textLength 3
+	values 
+	"YES" names EN "Yes",
+	"NO" names EN "No"
+}
+//WR467249 RJT1 changed names EN
+characteristic RPT_VM_STR_UPG {names EN "Add RecoverPoint for VM Starter" textLength 3
+	values 
+	"YES" names EN "Yes",
+	"NO" names EN "No"
+}
+
+//WR460554
+characteristic RPT_E_EXPAND_PRODUCT {names EN "Click 'Expand' to expand Product" textLength 3 values "YES" names EN "Expand", "NO" names EN "Unexpand"}
+//WR476104 
+characteristic PWRPTH_EXPAND_PRODUCT {names EN "Click 'Expand' to expand Product" textLength 3 values "YES" names EN "Expand", "NO" names EN "Unexpand"}
+//483505 
+characteristic APPSYNC_EXPAND_PRODUCT {names EN "Click 'Expand' to expand Product" textLength 3 values "YES" names EN "Expand", "NO" names EN "Unexpand"}
+
+//WR463484
+//uncommented VIPR_EXPAND_PRODUCT for WR479077
+characteristic VIPR_EXPAND_PRODUCT {names EN "Click 'Expand' to expand Product" textLength 3 values "YES" names EN "Expand", "NO" names EN "Un-expand"}
+characteristic NEW_ADD_VIPR_SRM {names EN "Add VIPR SRM" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+characteristic NEW_ADD_VIPR_SUITE {names EN "Add VIPR Suite" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+characteristic UPG_VIPR_SRM {names EN "Upgrade ViPR SRM" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+characteristic UPG_VIPR_SUITE {names EN "Upgrade ViPR Suite" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+characteristic UPG_ADD_VIPR_SRM {names EN "Add ViPR SRM" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+characteristic UPG_ADD_VIPR_SUITE {names EN "Add ViPR Suite" textLength 3 values "YES" names EN "Yes", "NO" names EN "No"}
+
+//WR472134
+characteristic CHECK_RP4VM_INSTALL {names EN "Will the customer install RP4VMs themselves?" textLength 3 values
+	"YES" names EN "Yes",
+	"NO" names EN "No"
+}
+characteristic REP_TYPE_SCAL {names EN "Replication Type" textLength 6 values
+	"LOCAL" names EN "Local",
+	"REMOTE" names EN "Remote",
+	"BOTH"	names EN "Both"
+}
+
+constraint SET_SOLUTION_IS_MTRL_INSTANCE {names EN "Set Solution is Mtrl Instance"
+	objects:
+		?ES is_object (material)(300)(nr=MPC_XTREMIO)
+	condition:
+		?ES.PRIMARY_PCM_SELECTION specified
+	restrictions:
+		?ES.IS_MATERIAL_INSTANCE = 'YES'
+}
+
+constraint SET_INSTALL_COUNTRY{
+      objects:
+            ?A is_a(300)SOLUTION_ATTR
+      restrictions:
+            ?A.domain INSTALLATION_COUNTRY in [
+					'AE','AR','AT','AU','BA','BE',
+					'BG','BH','BM','BO','BR','BW','BY','CA',
+					'CH','CL','CN','CO','CR','CS','CY','CZ',
+					'DE','DK','EC','EE','EG','ES','ET',
+					'FI','FR','GB','GI','GL','GR','HK','HR',
+					'HU','ID','IE','IL','IN','IQ','IS','IT',
+					'JO','JP','KE','KH','KP','KR','KW',
+					'KZ','LB','LT','LU','LV','MA','MK','MU',
+					'MX','MY','NG','NL','NO','NZ','OM','PA',
+					'PE','PH','PK','PL','PR','PT','QA','RO',
+					'RU','SA','SE','SG','SI','SK','SY','TH',
+					'TR','TT','TW','UA','US','UY','VE','ZA']  
+      inferences:
+            ?A.domain INSTALLATION_COUNTRY
+}
+
+constraint RESTRICT_TYPE_OF_CONFIG{
+	objects:
+            ?A is_a(300)SOLUTION_ATTR
+      restrictions:
+            ?A.domain TYPE_OF_CONFIGURATION in ['NEW','UPGRADE'],
+            ?A.required TYPE_OF_CONFIGURATION,
+            ?A.required SOLUTION_NAME,
+            ?A.domain SOFTWARE_FULFILLMENT_METHOD in ['Z0','Z2'] //Z2 added for defect# 240
+      inferences:
+      		?A.domain TYPE_OF_CONFIGURATION,
+      		?A.required TYPE_OF_CONFIGURATION,
+      		?A.required SOLUTION_NAME,
+      		?A.domain SOFTWARE_FULFILLMENT_METHOD
+}
+
+//Initially hide Cosells
+constraint HIDE_COSELLS{
+	objects:
+		?M is_a(300)MPC_XTREMIO,
+//		?VPLEX is_a(300)VPLEX_VS2,//Commented WR487807
+		?PP is_a(300)POWERPATH,
+		?APS is_a(300)APS_APPSYNC,
+		?VIPR is_a(300)VIPR_SUITE,
+		?SRM is_a(300)VIPR_SRM,
+		?RPT_E is_a(300)RPT_E,
+		?RPT_VM is_a(300)RPT_VM
+	condition:
+		?M.NEW_UPGRADE_SELECTED = 0
+	restrictions:
+//		?VPLEX.invisible EXPAND_PRODUCT,//Commented WR487807
+		?PP.invisible EXPAND_PRODUCT,
+		?APS.invisible EXPAND_PRODUCT,
+		?VIPR.invisible EXPAND_PRODUCT,
+		?SRM.invisible EXPAND_PRODUCT,
+		?RPT_E.invisible EXPAND_PRODUCT,
+		?RPT_VM.invisible EXPAND_PRODUCT
+	inferences:
+//		?VPLEX.invisible EXPAND_PRODUCT,//Commented WR487807
+		?PP.invisible EXPAND_PRODUCT,
+		?APS.invisible EXPAND_PRODUCT,
+		?VIPR.invisible EXPAND_PRODUCT,
+		?SRM.invisible EXPAND_PRODUCT,
+		?RPT_E.invisible EXPAND_PRODUCT,
+		?RPT_VM.invisible EXPAND_PRODUCT
+		
+}
+
+//VIPR SRM and VIPR Suite are mutually exclusive for new path, when one is expanded other will be hidden
+//RPT_E and RPT_VM are mutually exclusive for new and upgrade path
+constraint HIDE_CORRESPONING_COSELL{
+	objects:
+		?ATTR is_a(300)SOLUTION_ATTR,
+		?C is_a(300)MPC_XTREMIO,
+		?VIPR is_a(300)VIPR_SUITE,
+		?SRM is_a(300)VIPR_SRM
+	restrictions:
+	//added for WR463484
+		?SRM.invisible EXPAND_PRODUCT if ?ATTR.TYPE_OF_CONFIGURATION specified ,
+		?VIPR.invisible EXPAND_PRODUCT if ?ATTR.TYPE_OF_CONFIGURATION specified 
+//commented out for WR463484
+//		?SRM.invisible EXPAND_PRODUCT if (?VIPR.EXPAND_PRODUCT = 'YES' and ?ATTR.TYPE_OF_CONFIGURATION specified /* = 'NEW'*/), //updated for WR 448279
+//		?VIPR.invisible EXPAND_PRODUCT if (?SRM.EXPAND_PRODUCT = 'YES' and ?ATTR.TYPE_OF_CONFIGURATION specified /* = 'NEW'*/) //for making mutually exclusive in both path
+	inferences:
+		?SRM.invisible EXPAND_PRODUCT,
+		?VIPR.invisible EXPAND_PRODUCT
+		
+}
+
+
+
+rule DFLT_FULLFILMNT{
+	objects:
+	?SA is_a(300) SOLUTION_ATTR
+	body: then do:
+	?SA.SOFTWARE_FULFILLMENT_METHOD ?= 'Z0'
+} 
+
+//WR#444136
+rule SET_EXPAND_APPSYNC{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR
+	condition:
+		?C.TYPE_OF_CONFIGURATION = 'NEW' and ?PP.PRODUCT_ID in ['APS_APPSYNC'] 
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES',
+				ASSIGNMENT_OWNER = 'USER'
+		)
+}
+
+////WR#444136
+//constraint EXPAND_APPSYNC_UPG{
+//	objects:
+//		?EP is_a(300)EMC_PRODUCT,
+//		?ATTR is_a(300)SOLUTION_ATTR,
+//		?APS is_a(300)APS_APPSYNC
+//	condition:
+//		?ATTR.TYPE_OF_CONFIGURATION = 'UPGRADE' and ?EP.PRODUCT_ID in ['APS_APPSYNC']   
+//	restrictions:
+//		?APS.no_input EXPAND_PRODUCT
+//	inferences:
+//		?APS.no_input EXPAND_PRODUCT		
+//}
+
+
+//WR 448279
+//constraint HIDE_NOTE_VIPR_SRM_SUITE{
+//	objects:
+//		?M is_a(300)MPC_XTREMIO,
+//		?ATTR is_a(300)SOLUTION_ATTR
+//	condition:
+//		?M.NEW_UPGRADE_SELECTED = 0 and ?ATTR.TYPE_OF_CONFIGURATION = 'UPGRADE' 
+//	restrictions:
+//		?M.invisible NOTE_VIPR_SRM_SUITE
+//	inferences:
+//		?M.invisible NOTE_VIPR_SRM_SUITE
+//	explanations:
+//		"VIPR SRM and VIPR SUITE are mutually exclusive in New path"
+//}
+
+//WR 449621
+constraint HIDE_RPT_VM{
+	objects:
+		?ATTR is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO,
+		?C is_a(300)RPT_VM
+//	condition:
+//		(?ATTR.TYPE_OF_CONFIGURATION = 'NEW' and ?M.RPT_VM_NEW = 'NO') or
+//		(?ATTR.TYPE_OF_CONFIGURATION = 'UPGRADE' and ?M.ADDITIONAL_RPT_VM_STR_UPG = 'NO' and ?M.RPT_VM_UPG = 'NO')		
+	restrictions:
+		?C.invisible EXPAND_PRODUCT
+	inferences:
+		?C.invisible EXPAND_PRODUCT	
+	explanations:
+	    "Always hide Exapnd poduct button for RPT_VM"	
+}
+
+//WR 449621
+//WR 467249 RJT1
+rule SET_EXPAND_RPT_VM_NEW{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['RPT_VM'] and
+		(
+		?C.TYPE_OF_CONFIGURATION = 'NEW' 
+//			
+		)
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES'//,
+//				ASSIGNMENT_OWNER = 'USER'  //commented out for WR479077
+		)
+	explanations:
+		"EXPAND RPT_VM when Add RecoverPoint for VM to XtremIO Order? or Do you need an additional RecoverPoint for VM licenses? is selected as yes"
+}
+rule SET_EXPAND_RPT_VM_UPG{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['RPT_VM'] and
+		(
+		
+	(?C.TYPE_OF_CONFIGURATION = 'UPGRADE' and (?M.ADDITIONAL_RPT_VM_STR_UPG = 'YES' or ?M.RPT_VM_UPG = 'YES' or ?M.RPT_VM_STR_UPG = 'YES') 
+			and ?M.RPT_VM_EXPAND_PRODUCT ='YES') //added RP_VM_EXPAND_PRODUCT for WR458384	
+		)
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES'
+				
+		)
+	explanations:
+		"EXPAND RPT_VM when Add RecoverPoint for VM to XtremIO Order? or Do you need an additional RecoverPoint for VM licenses? is selected as yes"
+}
+
+//WR458384
+
+//rule INIT_RPT_VM_EXPAND_PRD_FLG{
+//	objects:
+//		?ATTR is_a(300)SOLUTION_ATTR,
+//		?M is_a(300)MPC_XTREMIO
+////		?C is_a(300)RPT_VM
+//	body:then increment:
+//		?M.RPT_VM_EXPAND_PRODUCT_FLAG by 0
+//		
+//}
+//rule INCR_RPT_VM_EXPAND_PRD_FLG{
+//	objects:
+//		?ATTR is_a(300)SOLUTION_ATTR,
+//		?M is_a(300)MPC_XTREMIO
+////		?C is_a(300)RPT_VM
+//	condition:
+//		(?ATTR.TYPE_OF_CONFIGURATION = 'NEW' and ?M.RPT_VM_NEW = 'NO') or
+//		(?ATTR.TYPE_OF_CONFIGURATION = 'UPGRADE' and ?M.ADDITIONAL_RPT_VM_STR_UPG = 'NO' and ?M.RPT_VM_UPG = 'NO')	
+//	body:then increment:
+//		?M.RPT_VM_EXPAND_PRODUCT_FLAG by 1
+//		
+//}
+//
+//constraint HIDE_RPT_VM_EXPAND_PRD{
+//	objects:
+////		?ATTR is_a(300)SOLUTION_ATTR,
+//		?M is_a(300)MPC_XTREMIO
+////		?C is_a(300)RPT_VM
+//	condition:
+//		?M.RPT_VM_EXPAND_PRODUCT_FLAG = 0	
+//	restrictions:
+//		?M.invisible RPT_VM_EXPAND_PRODUCT
+//	inferences:
+//		?M.invisible RPT_VM_EXPAND_PRODUCT		
+//}
+//
+//rule MAKE_STICKY_DELT_RPT_VM_EPND {
+//  objects: 
+//    ?S is_a (300)MPC_XTREMIO
+//  body:
+//    then do: 
+//      ?S.RPT_VM_EXPAND_PRODUCT ?= 'NO'
+//  explanations "Making RPT_VM expand product to Sticky default 'No'"   
+//}
+
+
+
+
+//WR463484
+rule SET_EXPAND_VIPR_SRM{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['VIPR_SRM'] and
+	
+		(
+		(?C.TYPE_OF_CONFIGURATION = 'NEW' and ?M.NEW_ADD_VIPR_SRM = 'YES' and ?M.VIPR_EXPAND_PRODUCT ='YES' )//added VIPR_EXPAND_PRODUCT for WR479077
+		or
+		(?C.TYPE_OF_CONFIGURATION = 'UPGRADE' and ?M.VIPR_EXPAND_PRODUCT ='YES' and//added VIPR_EXPAND_PRODUCT for WR479077
+		(?M.UPG_VIPR_SRM = 'YES' or ?M.UPG_ADD_VIPR_SRM = 'YES' ))
+		)
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES'
+		)
+//?PP.EXPAND_PRODUCT ?= 'YES'
+	explanations:
+		"EXPAND VIPR_SRM when ADD vipr SRM is yes"
+}
+//WR463484
+rule SET_EXPAND_VIPR_SUITE{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['VIPR_SUITE'] and
+	
+		(
+		(?C.TYPE_OF_CONFIGURATION = 'NEW' and ( ?M.NEW_ADD_VIPR_SUITE = 'YES' and ?M.VIPR_EXPAND_PRODUCT ='YES') )//added VIPR_EXPAND_PRODUCT for WR479077 
+		or
+		(?C.TYPE_OF_CONFIGURATION = 'UPGRADE' and ?M.VIPR_EXPAND_PRODUCT ='YES' and //added VIPR_EXPAND_PRODUCT for WR479077
+		(?M.UPG_VIPR_SUITE = 'YES' or ?M.UPG_ADD_VIPR_SUITE = 'YES') )
+		)
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES'
+		)
+//?PP.EXPAND_PRODUCT ?= 'YES'
+	explanations:
+		"EXPAND VIPR_SUITE when ADD vipr Suite is yes"
+}
+
+//WR460554 Pravin sart
+//WR460554 Pravin sart
+constraint EXPAND_GEN6_PCM_PRODUCT {names EN "Expand First Product"
+	objects:
+	?SOL is_a (300)EMC_SOLUTION,
+	?RS is_a(300)XTREM_SYNC,
+	?PROD is_a(300)EMC_PRODUCT
+condition:
+	?RS.RPA_QUANTITY > 0 or (?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA' or ?RS.RPA_TYPE_UPG_XTR = 'PHYSICAL_RPA')
+	restrictions:
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and ?RS.NO_ADD_PHY_RPA = 1,
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 2 or (?RS.RPA_QUANTITY_NEW_XTR =2 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or (?RS.RPA_QUANTITY_UPG_XTR = 2) or (?RS.NO_ADD_PHY_RPA = 2)),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 2 or (?RS.RPA_QUANTITY_NEW_XTR =2 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 2 or ?RS.NO_ADD_PHY_RPA = 2),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 3 or (?RS.RPA_QUANTITY_NEW_XTR =3 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 3 or ?RS.NO_ADD_PHY_RPA = 3),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 3 or (?RS.RPA_QUANTITY_NEW_XTR =3 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 3 or ?RS.NO_ADD_PHY_RPA = 3),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 3 or (?RS.RPA_QUANTITY_NEW_XTR =3 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 3 or ?RS.NO_ADD_PHY_RPA = 3),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 4 or (?RS.RPA_QUANTITY_NEW_XTR =4 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 4 or ?RS.NO_ADD_PHY_RPA = 4),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 4 or (?RS.RPA_QUANTITY_NEW_XTR =4 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 4 or ?RS.NO_ADD_PHY_RPA = 4),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 4 or (?RS.RPA_QUANTITY_NEW_XTR =4 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 4 or ?RS.NO_ADD_PHY_RPA = 4),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE4' and ?PROD.SSC_INSTANCE_NUMBER= 12 and (?RS.RPA_QUANTITY = 4 or (?RS.RPA_QUANTITY_NEW_XTR =4 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 4 or ?RS.NO_ADD_PHY_RPA = 4),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 5 or (?RS.RPA_QUANTITY_NEW_XTR =5 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 5 or ?RS.NO_ADD_PHY_RPA = 5),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 5 or (?RS.RPA_QUANTITY_NEW_XTR =5 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 5 or ?RS.NO_ADD_PHY_RPA = 5),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 5 or (?RS.RPA_QUANTITY_NEW_XTR =5 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 5 or ?RS.NO_ADD_PHY_RPA = 5),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE4' and ?PROD.SSC_INSTANCE_NUMBER= 12 and (?RS.RPA_QUANTITY = 5 or (?RS.RPA_QUANTITY_NEW_XTR =5 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 5 or ?RS.NO_ADD_PHY_RPA = 5),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE5' and ?PROD.SSC_INSTANCE_NUMBER= 13 and (?RS.RPA_QUANTITY = 5 or (?RS.RPA_QUANTITY_NEW_XTR =5 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 5 or ?RS.NO_ADD_PHY_RPA = 5),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE4' and ?PROD.SSC_INSTANCE_NUMBER= 12 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE5' and ?PROD.SSC_INSTANCE_NUMBER= 13 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE6' and ?PROD.SSC_INSTANCE_NUMBER= 14 and (?RS.RPA_QUANTITY = 6 or (?RS.RPA_QUANTITY_NEW_XTR =6 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 6 or ?RS.NO_ADD_PHY_RPA = 6),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE4' and ?PROD.SSC_INSTANCE_NUMBER= 12 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE5' and ?PROD.SSC_INSTANCE_NUMBER= 13 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE6' and ?PROD.SSC_INSTANCE_NUMBER= 14 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE7' and ?PROD.SSC_INSTANCE_NUMBER= 15 and (?RS.RPA_QUANTITY = 7 or (?RS.RPA_QUANTITY_NEW_XTR =7 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 7),
+	
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE1' and ?PROD.SSC_INSTANCE_NUMBER= 9 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE2' and ?PROD.SSC_INSTANCE_NUMBER= 10 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE3' and ?PROD.SSC_INSTANCE_NUMBER= 11 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE4' and ?PROD.SSC_INSTANCE_NUMBER= 12 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE5' and ?PROD.SSC_INSTANCE_NUMBER= 13 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE6' and ?PROD.SSC_INSTANCE_NUMBER= 14 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE7' and ?PROD.SSC_INSTANCE_NUMBER= 15 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8),
+	?PROD.EXPAND_PRODUCT = 'YES' if ?PROD.PRODUCT_ID_UNEXPANDED='RPT_E_UE8' and ?PROD.SSC_INSTANCE_NUMBER= 16 and (?RS.RPA_QUANTITY = 8 or (?RS.RPA_QUANTITY_NEW_XTR =8 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or ?RS.RPA_QUANTITY_UPG_XTR = 8)
+	
+	inferences:
+	?PROD.EXPAND_PRODUCT		
+}
+
+//constraint EXPAND_GEN6_PCM_PRODUCT {names EN "Expand First Product"
+//	objects:
+//	?PRD is_object(material)(300)(nr=RPT_E_UE),
+//	?SOL is_a (300)EMC_SOLUTION,
+//	?RS is_a(300)XTREM_SYNC,
+//	?EP is_a(300)EMC_PRODUCT
+//	condition:
+//	(?RS.RPA_QUANTITY > 0 or (?RS.RPA_QUANTITY_NEW_XTR > 0 and ?RS.RPA_TYPE_NEW_XTR = 'PHYSICAL_RPA') or (?RS.RPA_QUANTITY_UPG_XTR > 0 and ?RS.RPA_TYPE_UPG_XTR = 'PHYSICAL_RPA') or (?RS.NO_ADD_PHY_RPA > 0 and ?RS.RPA_TYPE_UPG_XTR = 'PHYSICAL_RPA')) 
+//	and (?PRD.SSC_INSTANCE_NUMBER > 8 and (?PRD.SSC_INSTANCE_NUMBER <= ?RS.RPA_QUANTITY + 8 or ?PRD.SSC_INSTANCE_NUMBER <= ?RS.RPA_QUANTITY_NEW_XTR + 8 
+//		or ?PRD.SSC_INSTANCE_NUMBER <= ?RS.RPA_QUANTITY_UPG_XTR + 8 or ?PRD.SSC_INSTANCE_NUMBER <= ?RS.NO_ADD_PHY_RPA + 8
+//	)) 
+//	and ?SOL.TYPE_OF_MPC_SOLUTION in ['BUNDLE']
+//	restrictions:
+//	?PRD.EXPAND_PRODUCT = 'YES'
+//	inferences:
+//	?PRD.EXPAND_PRODUCT		
+//}
+
+//constraint HIDE_MULTI_GEN6_PCM {names EN "Expand First Product"
+//	objects:
+//	?EP is_a(300)EMC_PRODUCT
+//	condition:
+//	?EP.SSC_INSTANCE_NUMBER >= 8 and ?EP.SSC_INSTANCE_NUMBER <= 16
+//	restrictions:
+//	?EP.invisible EXPAND_PRODUCT
+//	inferences:
+//	?EP.invisible EXPAND_PRODUCT		
+//}
+
+rule SET_EXPAND_RPT_E{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['RPT_E'] and ?PP.SSC_INSTANCE_NUMBER = 8 and
+		((?C.TYPE_OF_CONFIGURATION = 'NEW' and (?M.ADD_RPT_E_TO_XTREMIO = 'YES' or ?M.ADD_RPT_E_FULL  = 'YES') and ?M.RPT_E_EXPAND_PRODUCT ='YES') 
+			or (?C.TYPE_OF_CONFIGURATION = 'UPGRADE' and (?M.ADD_RPT_E_TO_XTREMIO = 'YES' or ?M.ADD_RPT_E_FULL_UPG  = 'YES' or ?M.ADD_RPT_TO_XIO_UPG = 'YES' or ?M.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?M.UPG_RPT_E_FULL = 'YES' or ?M.ADD_PHY_APP = 'YES') and ?M.RPT_E_EXPAND_PRODUCT ='YES') 
+		) 
+	body:
+		then do:
+	pfunction ASSIGN_CSTIC_VALUE (
+				ASSIGNMENT_INSTANCE = ?PP,
+				ASSIGNMENT_CSTIC_NAME_1 = 'EXPAND_PRODUCT',
+				ASSIGNMENT_CSTIC_VAL_S_1 = 'YES'
+		)
+	explanations:
+		"EXPAND RPT_E when "
+}
+
+//Default cstics to option "NO"
+rule DEFAULT_CSTICS_NO {
+  objects: 
+    	?C is_a (300)MPC_XTREMIO
+  body:
+  then do:
+  	?C.RPT_E_EXPAND_PRODUCT ?= 'NO',
+  	?C.ADD_RPT_E_TO_XTREMIO ?= 'NO',
+  	?C.XTREMIO_UPG_TO_FULL_XTREMIO ?= 'NO',
+  	?C.ADD_PHY_APP ?= 'NO',
+  	?C.ADD_RPT_E_FULL ?= 'NO',
+  	?C.ADD_RPT_TO_XIO_UPG ?= 'NO',
+  	?C.ADD_RPT_E_FULL_UPG ?= 'NO',
+  	?C.UPG_RPT_E_FULL ?= 'NO'
+}
+
+constraint INV_INITIAL_RP_CSTIC {
+	objects:
+			?C is_a (300)MPC_XTREMIO
+	condition:
+			?C.RPT_E_EXPAND_PRODUCT = 'NO'
+	restrictions:
+			?C.invisible ADD_RPT_E_TO_XTREMIO,
+			?C.invisible ADD_RPT_E_FULL,
+			?C.invisible XTREMIO_UPG_TO_FULL_XTREMIO,
+			?C.invisible ADD_PHY_APP,
+			?C.invisible ADD_RPT_TO_XIO_UPG,
+			?C.invisible ADD_RPT_E_FULL_UPG,
+			?C.invisible UPG_RPT_E_FULL
+	inferences:
+			?C.invisible ADD_RPT_E_TO_XTREMIO,
+			?C.invisible ADD_RPT_E_FULL,
+			?C.invisible XTREMIO_UPG_TO_FULL_XTREMIO,
+			?C.invisible ADD_PHY_APP,
+			?C.invisible ADD_RPT_TO_XIO_UPG,
+			?C.invisible ADD_RPT_E_FULL_UPG,
+			?C.invisible UPG_RPT_E_FULL
+}
+
+constraint INV_NEW_RP_CSTIC {
+	objects:
+			?C is_a (300)MPC_XTREMIO,
+			?SOL is_a(300)SOLUTION_ATTR
+	condition:
+			?C.RPT_E_EXPAND_PRODUCT = 'YES' and ?SOL.TYPE_OF_CONFIGURATION = 'NEW'
+	restrictions:
+			?C.invisible XTREMIO_UPG_TO_FULL_XTREMIO,
+			?C.invisible ADD_PHY_APP,
+			?C.invisible ADD_RPT_TO_XIO_UPG,
+			?C.invisible ADD_RPT_E_FULL_UPG,
+			?C.invisible UPG_RPT_E_FULL
+	inferences:
+			?C.invisible XTREMIO_UPG_TO_FULL_XTREMIO,
+			?C.invisible ADD_PHY_APP,
+			?C.invisible ADD_RPT_TO_XIO_UPG,
+			?C.invisible ADD_RPT_E_FULL_UPG,
+			?C.invisible UPG_RPT_E_FULL
+}
+
+constraint INV_UPG_RP_CSTIC {
+	objects:
+			?C is_a (300)MPC_XTREMIO,
+			?SOL is_a(300)SOLUTION_ATTR
+	condition:
+			?C.RPT_E_EXPAND_PRODUCT = 'YES' and ?SOL.TYPE_OF_CONFIGURATION = 'UPGRADE'
+	restrictions:
+			?C.invisible ADD_RPT_E_FULL
+	inferences:
+			?C.invisible ADD_RPT_E_FULL
+}
+
+constraint DISABLE_RPT_E_OPTIONS_NEW{
+	objects:	
+		?C is_a(300)MPC_XTREMIO,
+		?SOL is_a(300)SOLUTION_ATTR
+	condition:
+		?SOL.TYPE_OF_CONFIGURATION = 'NEW'
+	restrictions:
+		?C.no_input ADD_RPT_E_TO_XTREMIO if ?C.ADD_RPT_E_FULL = 'YES',
+		?C.no_input ADD_RPT_E_FULL if ?C.ADD_RPT_E_TO_XTREMIO = 'YES'
+	inferences:
+		?C.no_input ADD_RPT_E_TO_XTREMIO,
+		?C.no_input ADD_RPT_E_FULL
+}
+
+constraint DISABLE_RPT_E_OPTIONS_UPG{
+	objects:	
+		?C is_a(300)MPC_XTREMIO,
+		?SOL is_a(300)SOLUTION_ATTR
+	condition:
+		?SOL.TYPE_OF_CONFIGURATION = 'UPGRADE'
+	restrictions:
+		?C.no_input ADD_RPT_E_TO_XTREMIO if ?C.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?C.ADD_RPT_TO_XIO_UPG = 'YES' or ?C.ADD_RPT_E_FULL_UPG = 'YES' or ?C.ADD_PHY_APP = 'YES' or ?C.UPG_RPT_E_FULL = 'YES',
+		?C.no_input XTREMIO_UPG_TO_FULL_XTREMIO if ?C.ADD_RPT_E_TO_XTREMIO = 'YES' or ?C.ADD_RPT_TO_XIO_UPG = 'YES' or ?C.ADD_RPT_E_FULL_UPG = 'YES' or ?C.ADD_PHY_APP = 'YES' or ?C.UPG_RPT_E_FULL = 'YES',
+		?C.no_input ADD_RPT_TO_XIO_UPG if ?C.ADD_RPT_E_TO_XTREMIO = 'YES' or ?C.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?C.ADD_RPT_E_FULL_UPG = 'YES' or ?C.ADD_PHY_APP = 'YES' or ?C.UPG_RPT_E_FULL = 'YES',
+		?C.no_input ADD_RPT_E_FULL_UPG if ?C.ADD_RPT_E_TO_XTREMIO = 'YES' or ?C.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?C.ADD_RPT_TO_XIO_UPG = 'YES' or ?C.ADD_PHY_APP = 'YES' or ?C.UPG_RPT_E_FULL = 'YES',
+		?C.no_input ADD_PHY_APP if ?C.ADD_RPT_E_TO_XTREMIO = 'YES' or ?C.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?C.ADD_RPT_TO_XIO_UPG = 'YES' or ?C.ADD_RPT_E_FULL_UPG = 'YES' or ?C.UPG_RPT_E_FULL = 'YES',
+		?C.no_input UPG_RPT_E_FULL if ?C.ADD_RPT_E_TO_XTREMIO = 'YES' or ?C.XTREMIO_UPG_TO_FULL_XTREMIO = 'YES' or ?C.ADD_RPT_TO_XIO_UPG = 'YES' or ?C.ADD_RPT_E_FULL_UPG = 'YES' or ?C.ADD_PHY_APP = 'YES'
+	inferences:
+		?C.no_input ADD_RPT_E_TO_XTREMIO,
+		?C.no_input XTREMIO_UPG_TO_FULL_XTREMIO,
+		?C.no_input ADD_RPT_TO_XIO_UPG,
+		?C.no_input ADD_RPT_E_FULL_UPG,
+		?C.no_input ADD_PHY_APP,
+		?C.no_input UPG_RPT_E_FULL
+}
+
+//END Pravin
+//WR474537
+//Disable VPLEX VS2 Expand button so that user cant configure this cosell in MPC Xtremio
+//constraint DISABLE_VS2_EXPAND_BUTTON{
+//	objects:
+//		?VPLEX is_a(300)VPLEX_VS2,
+//		?MPC is_a(300)MPC_XTREMIO
+//	restrictions:
+//		?VPLEX.no_input EXPAND_PRODUCT
+//	inferences:
+//		?VPLEX.no_input EXPAND_PRODUCT
+//}//Commented WR487807
+
+//WR476104 
+constraint SET_PWRPTH_EXPAND_PRODUCT{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['POWERPATH'] and
+		?C.TYPE_OF_CONFIGURATION specified
+	restrictions:
+		?M.PWRPTH_EXPAND_PRODUCT = ?PP.EXPAND_PRODUCT
+	explanations"To pass the value of powerpath expand product"
+		}
+		
+//483505 
+constraint SET_APSYNC_EXPAND_PRODUCT{
+	objects:
+		?PP is_a(300)EMC_PRODUCT,
+		?C is_a(300)SOLUTION_ATTR,
+		?M is_a(300)MPC_XTREMIO
+	condition:
+		?PP.PRODUCT_ID in ['APS_APPSYNC'] and
+		?C.TYPE_OF_CONFIGURATION specified
+	restrictions:
+		?M.APPSYNC_EXPAND_PRODUCT = ?PP.EXPAND_PRODUCT
+	explanations"To pass the value of Appsync expand product"
+		}
